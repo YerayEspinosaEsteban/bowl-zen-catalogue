@@ -8,35 +8,60 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Neutral backgrounds */
+    --background: 0 0% 99%;
+    --foreground: 0 0% 15%;
 
+    /* Card styles */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 15%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Green accent system */
+    --primary: 120 45% 45%;
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 120 25% 85%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Neutral tones */
+    --secondary: 30 8% 92%;
+    --secondary-foreground: 0 0% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 30 5% 95%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 120 35% 88%;
+    --accent-foreground: 0 0% 20%;
+
+    /* Beige system */
+    --beige: 35 15% 90%;
+    --beige-dark: 35 12% 80%;
+    --warm-gray: 30 3% 88%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 30 5% 88%;
+    --input: 30 5% 90%;
+    --ring: 120 45% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+
+    /* Typography system */
+    --font-heading: 'Inter', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+
+    /* Custom design tokens */
+    --surface-elevated: 0 0% 100%;
+    --surface-subtle: 30 5% 97%;
+    --gradient-subtle: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(30 5% 97%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(120 35% 88%) 0%, hsl(120 25% 85%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --shadow-medium: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-large: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 
     --sidebar-background: 0 0% 98%;
 
@@ -101,5 +126,77 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  /* Typography styles */
+  .heading-xl {
+    @apply text-5xl md:text-6xl font-bold tracking-tight;
+    font-family: var(--font-heading);
+  }
+  
+  .heading-lg {
+    @apply text-3xl md:text-4xl font-bold tracking-tight;
+    font-family: var(--font-heading);
+  }
+  
+  .heading-md {
+    @apply text-xl md:text-2xl font-semibold;
+    font-family: var(--font-heading);
+  }
+  
+  .text-elegant {
+    @apply text-lg leading-relaxed text-muted-foreground;
+  }
+
+  /* Surface styles */
+  .surface-elevated {
+    background: hsl(var(--surface-elevated));
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .surface-subtle {
+    background: hsl(var(--surface-subtle));
+  }
+  
+  .surface-beige {
+    background: hsl(var(--beige));
+  }
+
+  /* Button variants */
+  .btn-hero {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-4 rounded-full font-medium text-lg transition-all duration-300 hover:scale-105;
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .btn-subtle {
+    @apply bg-accent text-accent-foreground hover:bg-accent/80 px-6 py-3 rounded-full font-medium transition-all duration-200;
+  }
+
+  /* Animations */
+  .fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .stagger-children > * {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+  
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
